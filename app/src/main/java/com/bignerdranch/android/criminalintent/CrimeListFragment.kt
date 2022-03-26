@@ -116,6 +116,3 @@ class CrimeListFragment: Fragment() {
         crimeRecyclerView.adapter = adapter
     }
 }
-
-
-
