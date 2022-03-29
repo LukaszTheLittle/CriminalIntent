@@ -22,6 +22,8 @@ private const val TAG = "CrimeListFragment"
 
 class CrimeListFragment: Fragment() {
 
+    // Required interface for hosting activities
+
     interface Callbacks {
         fun onCrimeSelected(crimeId: UUID)
     }
@@ -97,11 +99,9 @@ class CrimeListFragment: Fragment() {
             }
         }
 
-        override fun onClick(v: View) {
-            Toast.makeText(context, "${crime.title} pressed!", Toast.LENGTH_SHORT)
-                .show()
+        override fun onClick(v: View?) {
+            callbacks?.onCrimeSelected(crime.id)
         }
-
     }
 
     private inner class CrimeAdapter(var crimes: List<Crime>)
