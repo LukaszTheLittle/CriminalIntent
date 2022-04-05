@@ -69,9 +69,9 @@ class CrimeListFragment: Fragment() {
         )
     }
 
-    override fun onDetach() {
-        super.onDetach()
-        callbacks = null
+    private fun updateUI(crimes: List<Crime>) {
+        adapter = CrimeAdapter(crimes)
+        crimeRecyclerView.adapter = adapter
     }
 
     private inner class CrimeHolder(view: View)
@@ -126,8 +126,8 @@ class CrimeListFragment: Fragment() {
         }
     }
 
-    private fun updateUI(crimes: List<Crime>) {
-        adapter = CrimeAdapter(crimes)
-        crimeRecyclerView.adapter = adapter
+    override fun onDetach() {
+        super.onDetach()
+        callbacks = null
     }
 }
