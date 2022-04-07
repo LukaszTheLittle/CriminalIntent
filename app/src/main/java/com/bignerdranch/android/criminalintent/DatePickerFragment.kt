@@ -9,8 +9,6 @@ import java.util.Calendar
 import java.util.Date
 import java.util.GregorianCalendar
 
-private const val ARG_DATE = "date"
-
 class DatePickerFragment: DialogFragment() {
 
     interface Callbacks {
@@ -45,6 +43,9 @@ class DatePickerFragment: DialogFragment() {
     }
 
     companion object {
+
+        private const val ARG_DATE = "date"
+
         fun newInstance(date: Date): DatePickerFragment {
             val args = Bundle().apply {
                 putSerializable(ARG_DATE, date)
