@@ -1,6 +1,8 @@
 package com.bignerdranch.android.criminalintent
 
+import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.provider.ContactsContract
 import android.text.Editable
@@ -154,6 +156,34 @@ class CrimeFragment: Fragment(), DatePickerFragment.Callbacks {
         }
         if (crime.suspect.isNotEmpty()) {
             suspectButton.text = crime.suspect
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        when {
+            resultCode != Activity.RESULT_OK -> return
+
+            requestCode == REQUEST_CONTACT && data != null -> {
+                val contactUri: Uri = data.data ?: return
+                // specify which fields you want your query to return values for
+                val queryFields = arrayOf(ContactsContract.Contacts.DISPLAY_NAME)
+                // perform your query - the contactUri is like "where" clause here
+                val cursor = requireActivity().contentResolver
+                    .query(contactUri, queryFields, null, null, null)
+                cursor?.use {
+                    // verify cursor contains at least one result
+                    if (it.count == 0) {
+                        return
+                    }
+
+                    // pull out the first column of the first row of data - that's your suspect name
+                    it.moveToFirst()
+                    val suspect = it.getString(0)
+                    crime.suspect = suspect
+                    crimeDetailViewModel.saveCrime(crime)
+                    suspectButton.text = suspect
+                }
+            }
         }
     }
 
