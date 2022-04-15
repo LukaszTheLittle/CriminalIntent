@@ -5,8 +5,6 @@ import android.os.Bundle
 import android.util.Log
 import java.util.UUID
 
-private const val TAG = "MainActivity"
-
 class MainActivity : AppCompatActivity(),
     CrimeListFragment.Callbacks {
 
@@ -33,5 +31,9 @@ class MainActivity : AppCompatActivity(),
             .replace(R.id.fragment_container, fragment)
             .addToBackStack(null)
             .commit()
+    }
+
+    companion object {
+        private const val TAG = "MainActivity"
     }
 }
