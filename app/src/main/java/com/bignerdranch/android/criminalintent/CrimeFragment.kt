@@ -22,12 +22,6 @@ import androidx.lifecycle.ViewModelProvider
 import java.util.Date
 import java.util.UUID
 
-private const val ARG_CRIME_ID = "crime_id"
-private const val DIALOG_DATE = "DialogDate"
-private const val REQUEST_DATE = 0
-private const val REQUEST_CONTACT = 1
-private const val DATE_FORMAT = "EEE, MMM, dd"
-
 class CrimeFragment: Fragment(), DatePickerFragment.Callbacks {
 
     private lateinit var crime: Crime
@@ -122,7 +116,7 @@ class CrimeFragment: Fragment(), DatePickerFragment.Callbacks {
 
         reportButton.setOnClickListener {
             Intent(Intent.ACTION_SEND).apply {
-                type = "text/plain"
+                type = TYPE_PLAIN_TEXT
                 putExtra(Intent.EXTRA_TEXT, getCrimeReport())
                 putExtra(Intent.EXTRA_SUBJECT, getString(R.string.crime_report_subject))
             } .also { intent ->
@@ -185,7 +179,7 @@ class CrimeFragment: Fragment(), DatePickerFragment.Callbacks {
                         return
                     }
 
-                    // pull out the first column of the first row of data - that's your suspect name
+                    // pull out the first column of the first row of data - that's suspect name
                     it.moveToFirst()
                     val suspect = it.getString(0)
                     crime.suspect = suspect
@@ -214,6 +208,13 @@ class CrimeFragment: Fragment(), DatePickerFragment.Callbacks {
     }
 
     companion object {
+
+        private const val ARG_CRIME_ID = "crime_id"
+        private const val DIALOG_DATE = "DialogDate"
+        private const val REQUEST_DATE = 0
+        private const val REQUEST_CONTACT = 1
+        private const val DATE_FORMAT = "EEE, MMM, dd"
+        private const val TYPE_PLAIN_TEXT = "text/plain"
 
         fun newInstance(crimeId: UUID): CrimeFragment {
             val args = Bundle().apply {

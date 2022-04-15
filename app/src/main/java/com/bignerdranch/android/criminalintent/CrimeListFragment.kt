@@ -20,8 +20,6 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 import java.util.UUID
 
-private const val TAG = "CrimeListFragment"
-
 class CrimeListFragment: Fragment() {
 
     // Required interface for hosting activities
@@ -129,6 +127,9 @@ class CrimeListFragment: Fragment() {
     }
 
     companion object {
+
+        private const val TAG = "CrimeListFragment"
+
         fun newInstance(): CrimeListFragment {
             return CrimeListFragment()
         }
