@@ -18,6 +18,7 @@ import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
+import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -36,6 +37,7 @@ class CrimeFragment: Fragment(), DatePickerFragment.Callbacks {
     private lateinit var photoButton: ImageButton
     private lateinit var photoView: ImageView
     private lateinit var photoFile: File
+    private lateinit var photoUri: Uri
 
     private val crimeDetailViewModel: CrimeDetailViewModel by lazy {
         ViewModelProvider(this).get(CrimeDetailViewModel::class.java)
@@ -74,6 +76,8 @@ class CrimeFragment: Fragment(), DatePickerFragment.Callbacks {
                 crime?.let {
                     this.crime = crime
                     photoFile = crimeDetailViewModel.getPhotoFile(crime)
+                    photoUri = FileProvider.getUriForFile(requireActivity(),
+                    "com.bignerdranch.android.criminalIntent.fileprovider", photoFile)
                     updateUI()
                 }
             }
