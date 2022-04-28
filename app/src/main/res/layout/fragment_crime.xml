@@ -47,7 +47,6 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="53dp"
         android:hint="@string/crime_title_hint"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/crime_photo"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
