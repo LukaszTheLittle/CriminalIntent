@@ -78,7 +78,7 @@ class CrimeFragment: Fragment(), DatePickerFragment.Callbacks {
                     this.crime = crime
                     photoFile = crimeDetailViewModel.getPhotoFile(crime)
                     photoUri = FileProvider.getUriForFile(requireActivity(),
-                    "com.bignerdranch.android.criminalintent.fileprovider", photoFile)
+                        FILE_PROVIDER_AUTHORITY, photoFile)
                     updateUI()
                 }
             }
@@ -281,6 +281,7 @@ class CrimeFragment: Fragment(), DatePickerFragment.Callbacks {
         private const val REQUEST_PHOTO = 2
         private const val DATE_FORMAT = "EEE, MMM, dd"
         private const val TYPE_PLAIN_TEXT = "text/plain"
+        private const val FILE_PROVIDER_AUTHORITY = "com.bignerdranch.android.criminalintent.fileprovider"
 
         fun newInstance(crimeId: UUID): CrimeFragment {
             val args = Bundle().apply {
